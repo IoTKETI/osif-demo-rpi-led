@@ -1,6 +1,6 @@
 {
   "service": {
-    "serviceName": "iotweek-demo-button",
+    "serviceName": "iotweek-demo-led",
     "versionCode": {
       "major": 1,
       "minor": 0,
@@ -9,13 +9,7 @@
     "creator": "SyncTechno",
     "openData": {
       "local": [],
-      "global": [
-        {
-          "name": "iotweek-led-state",
-          "description": "LED State",
-          "template": "LED State value: numeric data; 0: off, 1: Red, 2: Green, 3: Blue"
-        }
-      ]
+      "global": []
     },
     "serviceDesc": "IoT Week 2018 Demo service"
   },
