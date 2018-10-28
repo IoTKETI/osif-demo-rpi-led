@@ -17,6 +17,7 @@
   "dependencies": {
     "hazelcast-client": "^0.6.1",
     "onoff": "^1.1.8",
+    "osif-client": "^1.0.1",
     "uuid": "^3.3.2"
   }
 }
