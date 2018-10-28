@@ -1,5 +1,5 @@
 var GPIO = require('onoff').Gpio;
-var CiotDatabusClient = require('./lib/ciot.databus.client.js');
+var OsifClient = require('../index.js').Client;
 
 var ledRPinBCM    = 18;    //  Phy 12, wPi 1, BCM 18
 var ledGPinBCM    = 17;    //  Phy 11, wPi 0, BCM 17
@@ -46,7 +46,7 @@ function controlLED(ledState) {
 }
 
 var serviceOptions = require('./ciotservice.json');
-var client1 = new CiotDatabusClient(serviceOptions);
+var client1 = new OsifClient(serviceOptions);
 
 
 var ledState = LED_OFF;
@@ -66,23 +66,22 @@ function serviceStart() {
           //  LED Off
           controlLED(LED_OFF);
 
-          var listener = {
-            'updated':     function listener(key) {
-              console.log('LOCAL OPENDATA UPDATED : value : ', key);
+          var listener = function (key) {
+            console.log('LOCAL OPENDATA UPDATED : value : ', key);
 
-              client1.getLocalOpendata(key)
-                .then((value)=>{
-                  console.log('LISTENER : getLocalAppData : ', value);
+            client1.getLocalOpendata(key)
+              .then((value) => {
+                console.log('LISTENER : getLocalAppData : ', value);
 
-                  var temp = value.t;
+                var temp = value.t;
 
-                  temp = temp * 10;
-                  ledState = temp % 4;
+                temp = temp * 10;
+                ledState = temp % 4;
 
-                  controlLED(ledState);
-                })
-            }
+                controlLED(ledState);
+              })
           };
+
 
           client.subscribeToLocalOpendata('iotweek-sensor-value', listener);
 

@@ -8,13 +8,17 @@
     },
     "creator": "SyncTechno",
     "openData": {
-      "local": [],
+      "local": [{
+        "name": "iotweek-sensor-value",
+        "description": "Local open data",
+        "template": "local open data format"
+      }],
       "global": []
     },
     "serviceDesc": "IoT Week 2018 Demo service"
   },
   "databus": {
-    "globalHost": "13.124.60.44",
+    "globalHost": "osif.synctechno.com",
     "globalPort": "5701",
     "localPort": "5701"
   },
