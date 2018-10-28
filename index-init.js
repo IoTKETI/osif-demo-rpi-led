@@ -50,12 +50,10 @@ function controlLED(ledState) {
 var g_SensorControlState = 0;
 
 
-function onStatusChanged(err, state) {
+
+function onButtonPushed(err, state) {
   if(state === 0) {
-    g_SensorControlState ++;
-    if(g_SensorControlState > 3)
-      g_SensorControlState = 1;
-    controlLED(g_SensorControlState);
+    onStatusChanged();
   }
   else {
     return;
@@ -64,11 +62,20 @@ function onStatusChanged(err, state) {
 
 
 
+function onStatusChanged() {
+  g_SensorControlState ++;
+  if(g_SensorControlState > 3)
+    g_SensorControlState = 1;
+  controlLED(g_SensorControlState);
+}
+
+
+
 function serviceStart() {
   controlLED(LED_OFF);
 
 
-  button.watch(onStatusChanged);
+  button.watch(onButtonPushed);
 
   console.log('Service start...');
 }

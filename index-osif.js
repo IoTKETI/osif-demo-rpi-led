@@ -53,12 +53,13 @@ function controlLED(ledState) {
 var g_SensorControlState = 0;
 
 
-function onStatusChanged(err, state) {
+function onButtonPushed(err, state) {
   if(state === 0) {
     g_SensorControlState ++;
     if(g_SensorControlState > 3)
       g_SensorControlState = 1;
-    controlLED(g_SensorControlState);
+
+    client1.setLocalAppData("iotweek-sensor-control", g_SensorControlState);
   }
   else {
     return;
@@ -66,20 +67,56 @@ function onStatusChanged(err, state) {
 }
 
 
-
 function serviceStart() {
   controlLED(LED_OFF);
 
 
-  button.watch(onStatusChanged);
+  button.watch(onButtonPushed);
 
   console.log('Service start...');
+
+  client1.init()
+    .then(function(client) {
+      return client.startService();
+
+    })
+
+    .then(function(value) {
+      console.log('startService', value);
+
+      return client1.getLocalAppData("iotweek-sensor-control");
+    })
+
+    .then(function(value){
+      //  초기값 읽어오기
+      controlLED(value);
+
+
+      var listener = function (key) {
+        console.log('LOCAL OPENDATA UPDATED : value : ', key);
+
+        client1.getLocalOpendata(key)
+          .then((value) => {
+            console.log('LISTENER : getLocalAppData : ', value);
+
+            controlLED(value);
+          })
+      };
+
+
+      client1.subscribeToLocalOpendata('iotweek-sensor-control', listener);
+    })
+
+
+
 }
 
 
 function serviceShutdown() {
   controlLED(LED_OFF);
 
+  client1.stopService();
+  
   process.exit(0);
 }
 

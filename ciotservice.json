@@ -9,7 +9,7 @@
     "creator": "SyncTechno",
     "openData": {
       "local": [{
-        "name": "iotweek-sensor-value",
+        "name": "iotweek-sensor-control",
         "description": "Local open data",
         "template": "local open data format"
       }],
