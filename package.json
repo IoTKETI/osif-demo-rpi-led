@@ -4,7 +4,7 @@
   "description": "This README would normally document whatever steps are necessary to get your application up and running.",
   "main": "index.js",
   "scripts": {
-    "start": "DEBUG=ciot-databus-client node index.js",
+    "start": "DEBUG=osif* node index-osif.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

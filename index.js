@@ -45,7 +45,7 @@ function controlLED(ledState) {
   }
 }
 
-var serviceOptions = require('./ciotservice.json');
+var serviceOptions = require('./osif.json');
 var client1 = new OsifClient(serviceOptions);
 
 

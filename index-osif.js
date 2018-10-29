@@ -16,7 +16,7 @@ var button = new GPIO(buttonPinBCM, 'in', 'both');
 var LED_OFF = 0;
 var LED_ON = 2;
 
-var serviceOptions = require('./ciotservice.json');
+var serviceOptions = require('./osif.json');
 var client1 = new OSIFClient(serviceOptions);
 
 function controlLED(ledState) {
