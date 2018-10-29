@@ -55,6 +55,8 @@ var g_SensorControlState = 0;
 
 function onButtonPushed(err, state) {
   if(state === 0) {
+    console.log( 'button state is  0 '  );
+
     g_SensorControlState ++;
     if(g_SensorControlState > 3)
       g_SensorControlState = 1;
@@ -62,6 +64,7 @@ function onButtonPushed(err, state) {
     client1.setLocalAppData("iotweek-sensor-control", g_SensorControlState);
   }
   else {
+    console.log( 'button state is not 0 ' , state );
     return;
   }
 }
